@@ -1,0 +1,52 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+@using shoesAPI.Models
+
+@model IEnumerable<SneakersModel>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Sneakers</title>
+</head>
+<body>
+    <h1>Sneakers</h1>
+
+    <table>
+        <tr>
+            <th>Shoe Name</th>
+            <th>Brand</th>
+            <th>Colorway</th>
+            <th>Style ID</th>
+            <th>Thumbnail</th>
+            <th>Price</th>
+        </tr>
+        @foreach (var sneaker in Model)
+        {
+            <tr>
+                <td>@sneaker.shoeName</td>
+                <td>@sneaker.brand</td>
+                <td>@sneaker.colorway</td>
+                <td>@sneaker.styleID</td>
+                @*@<td><img src="@sneaker.thumbnail" alt="Thumbnail" /></td>*@
+                <td>
+                    @if (sneaker.lowestResellPrice != null)
+                    {
+                        <ul>
+                            <li>StockX: @sneaker.lowestResellPrice.stockX</li>
+                            <li>GOAT: @sneaker.lowestResellPrice.goat</li>
+                            <li>Flight Club: @sneaker.lowestResellPrice.flightClub</li>
+                        </ul>
+                    }
+                    else
+                    {
+                        <p>No price available</p>
+                    }
+                </td>
+            </tr>
+        }
+    </table>
+</body>
+</html>
